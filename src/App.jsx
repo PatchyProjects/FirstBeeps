@@ -2,7 +2,6 @@ import { useRef, useState } from 'react'
 import './App.css'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Grid, OrbitControls } from '@react-three/drei'
-import {useControls} from "leva"
 import { MeshBasicMaterial } from 'three'
 import * as Tone from 'tone'
 
@@ -39,7 +38,7 @@ const Cube = ({ position , size, color, note}) => {
         // position = {[position.x,position.y,isPressed ? position.z -0.1 : position.z]}
         onPointerOver={() => {setIsHovered(true); playSound();}}
         onPointerOut={() => setIsHovered(false)}
-        onPointerDown={() => {setIsPressed(true);}}
+        onPointerDown={() => {setIsPressed(true); playSound();}}
         onPointerUp={() => setIsPressed(false)}
       >
       
@@ -76,28 +75,16 @@ const ButtonGrid = ({ position, size, rows, cols, spacing=0.1}) => {
 }
 
 const Scene = () => {
-   const { gridSize, ...gridConfig } = useControls({
-    gridSize: [10.5, 10.5],
-    cellSize: { value: 0.6, min: 0, max: 10, step: 0.1 },
-    cellThickness: { value: 1, min: 0, max: 5, step: 0.1 },
-    cellColor: colors[0],
-    sectionSize: { value: 3.3, min: 0, max: 10, step: 0.1 },
-    sectionThickness: { value: 1.5, min: 0, max: 5, step: 0.1 },
-    sectionColor: '#9d4b4b',
-    fadeDistance: { value: 25, min: 0, max: 100, step: 1 },
-    fadeStrength: { value: 1, min: 0, max: 1, step: 0.1 },
-    followCamera: false,
-    infiniteGrid: true
-  })
+   
   return (
     <>
-    <Grid position={[0, -0.01, 0]}  args={gridSize} {...gridConfig}/>
+
     {/* <Ground /> */}
     <ButtonGrid position={[0, 0, 0]} size={{x: 1, y: 1}} rows={5} cols={5} spacing={.1} />
     <ambientLight intensity={.5} />
     <pointLight position={[0, 5, -15]} intensity={100}/>
     {/* <OrbitControls /> */}
-    
+
     </>
   )
 }
