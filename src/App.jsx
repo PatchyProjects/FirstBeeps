@@ -37,7 +37,7 @@ const sampler = new Tone.Sampler({
     E4: "Slice 15.wav",
     E5: "Slice 16.wav",
   },
-  baseUrl: "./src/assets/sfx/",
+  baseUrl: "https://zbglf93ewajbqlhm.public.blob.vercel-storage.com/",
 }).toDestination();
 
 const Ground = () => {
